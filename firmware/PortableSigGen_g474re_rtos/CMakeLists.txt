@@ -38,7 +38,8 @@ message("Build type: " ${CMAKE_BUILD_TYPE})
 add_executable(${CMAKE_PROJECT_NAME})
 
 # Add STM32CubeMX generated sources
-add_subdirectory(cmake/stm32cubemx)
+# add_subdirectory(cmake/stm32cubemx)
+add_subdirectory(cmake/stm32hal)
 
 # Link directories setup
 target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
@@ -62,7 +63,20 @@ target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE
 
 # Add linked libraries
 target_link_libraries(${CMAKE_PROJECT_NAME}
-    stm32cubemx
-
-    # Add user defined libraries
+    # stm32cubemx
+    stm32hal
+    freertos_kernel
+    freertos_config
 )
+
+add_library(freertos_config INTERFACE)
+
+target_include_directories(freertos_config SYSTEM
+    INTERFACE
+        Core/Inc
+)
+
+set(FREERTOS_HEAP "4")
+set(FREERTOS_PORT GCC_ARM_CM4F)
+
+add_subdirectory(../libs/FreeRTOS-Kernel freeRTOS)

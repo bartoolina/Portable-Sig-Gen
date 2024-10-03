@@ -12,5 +12,12 @@
 		{
 			"path": "."
 		}
-	]
+	],
+	"settings": {
+		"files.associations": {
+			"gpio.h": "c",
+			"usart.h": "c",
+			"main.h": "c"
+		}
+	}
 }
