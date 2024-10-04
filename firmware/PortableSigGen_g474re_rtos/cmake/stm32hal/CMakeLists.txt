@@ -16,7 +16,7 @@ target_include_directories(stm32hal INTERFACE
     ../../Core/Inc
     ../../Drivers/STM32G4xx_HAL_Driver/Inc
     ../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy
-    ../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2
+    # ../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2
     ../../Drivers/CMSIS/Device/ST/STM32G4xx/Include
     ../../Drivers/CMSIS/Include
 )
@@ -48,7 +48,7 @@ target_sources(stm32hal INTERFACE
     ../../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart_ex.c
     ../../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim.c
     ../../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim_ex.c
-    ../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.c
+    # ../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.c
     ../../Core/Src/system_stm32g4xx.c
     ../../Core/Src/sysmem.c
     ../../Core/Src/syscalls.c

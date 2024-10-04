@@ -1,5 +1,5 @@
 build/
 .vscode
-**/Middlewares/Third_Party/FreeRTOS/Source/**
-!**/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2
-!**/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/**
+**/Middlewares/Third_Party/FreeRTOS/Source
+# !**/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2
+# !**/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/**
