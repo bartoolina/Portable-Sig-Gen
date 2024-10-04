@@ -18,6 +18,65 @@
 			"gpio.h": "c",
 			"usart.h": "c",
 			"main.h": "c"
-		}
+		},
+		"cmake.autoSelectActiveFolder": false,
+	},
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"type": "cmake",
+				"label": "CMake: build",
+				"command": "build",
+				"targets": [
+					"PortableSigGen_g474re_rtos"
+				],
+				"preset": "${command:cmake.activeBuildPresetName}",
+				"group": {
+					"kind": "build",
+					"isDefault": true
+				},
+				"problemMatcher": [],
+				"detail": "CMake template build task"
+			},
+			{
+				"label": "echo",
+				"type": "shell",
+				"command": "echo ${command:cmake.getLaunchTargetPath}"
+			}
+		]
+	},
+	"launch": {
+		// Use IntelliSense to learn about possible attributes.
+		// Hover to view descriptions of existing attributes.
+		// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "RTOS - Debug",
+				"cwd": "${command:cmake.getLaunchTargetDirectory}",
+				"executable": "${command:cmake.getLaunchTargetFilename}",
+				"request": "launch",
+				"type": "cortex-debug",
+				"runToEntryPoint": "main",
+				"servertype": "jlink",
+				"device": "STM32G474RE",
+				"interface": "swd",
+				"svdFile": "C:/MyApps/STM32CubeProgrammer/SVDSTM32G474xx.svd",
+				"preLaunchTask": "${defaultBuildTask}",
+				"rttConfig": {
+					"enabled": true,
+					"address": "auto",
+					"decoders": [
+						{
+							"label": "RTT stdout",
+							"port": 0,
+							"type": "console",
+							"timestamp": true
+						}
+					]
+				},
+			}
+		]
 	}
 }
