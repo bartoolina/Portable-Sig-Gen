@@ -7,6 +7,10 @@ cmake_minimum_required(VERSION 3.22)
 # User is free to modify the file as much as necessary
 #
 
+set(APP_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../app")
+set(DRIVERS_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../drivers")
+set(LIBS_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../libs")
+
 # Setup compiler settings
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
@@ -38,8 +42,10 @@ message("Build type: " ${CMAKE_BUILD_TYPE})
 add_executable(${CMAKE_PROJECT_NAME})
 
 # Add STM32CubeMX generated sources
-# add_subdirectory(cmake/stm32cubemx)
 add_subdirectory(cmake/stm32hal)
+add_subdirectory(cmake/freertos)
+add_subdirectory(cmake/drivers)
+# add_subdirectory(cmake/app)
 
 # Link directories setup
 target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
@@ -65,18 +71,11 @@ target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE
 target_link_libraries(${CMAKE_PROJECT_NAME}
     # stm32cubemx
     stm32hal
-    freertos_kernel
-    freertos_config
+    freertos
+    drivers
 )
 
-add_library(freertos_config INTERFACE)
 
-target_include_directories(freertos_config SYSTEM
-    INTERFACE
-        ../app
-)
 
-set(FREERTOS_HEAP "4")
-set(FREERTOS_PORT GCC_ARM_CM4F)
 
-add_subdirectory(../libs/FreeRTOS-Kernel freeRTOS)
+
