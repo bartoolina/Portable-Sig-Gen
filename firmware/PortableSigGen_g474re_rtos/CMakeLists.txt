@@ -45,6 +45,7 @@ add_executable(${CMAKE_PROJECT_NAME})
 add_subdirectory(cmake/stm32hal)
 add_subdirectory(cmake/freertos)
 add_subdirectory(cmake/drivers)
+add_subdirectory(cmake/systemview)
 # add_subdirectory(cmake/app)
 
 # Link directories setup
@@ -67,10 +68,14 @@ target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined symbols
 )
 
+target_link_libraries(systemview PRIVATE freertos)
+target_link_libraries(freertos PRIVATE systemview)
+
 # Add linked libraries
 target_link_libraries(${CMAKE_PROJECT_NAME}
     # stm32cubemx
     stm32hal
+    systemview
     freertos
     drivers
 )

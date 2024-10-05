@@ -1,17 +1,19 @@
-add_library(freertos_config INTERFACE)
+add_library(freertos STATIC)
 
-set(FREERTOS_HEAP "4")
-set(FREERTOS_PORT GCC_ARM_CM4F)
-
-add_subdirectory(${LIBS_PATH}/FreeRTOS-Kernel freeRTOS)
-
-target_include_directories(freertos_config SYSTEM
-    INTERFACE
-        ${APP_PATH}
+target_include_directories(freertos PUBLIC
+    ${LIBS_PATH}/FreeRTOS-Kernel/include
+    ${LIBS_PATH}/FreeRTOS-Kernel/portable/GCC/ARM_CM4F
+    ${APP_PATH}
 )
 
-add_library(freertos INTERFACE)
-
-target_link_libraries(freertos INTERFACE
-    freertos_kernel
+target_sources(freertos PRIVATE
+    ${LIBS_PATH}/FreeRTOS-Kernel/croutine.c
+    ${LIBS_PATH}/FreeRTOS-Kernel/event_groups.c
+    ${LIBS_PATH}/FreeRTOS-Kernel/list.c
+    ${LIBS_PATH}/FreeRTOS-Kernel/queue.c
+    ${LIBS_PATH}/FreeRTOS-Kernel/stream_buffer.c
+    ${LIBS_PATH}/FreeRTOS-Kernel/tasks.c
+    ${LIBS_PATH}/FreeRTOS-Kernel/timers.c
+    ${LIBS_PATH}/FreeRTOS-Kernel/portable/MemMang/heap_4.c
+    ${LIBS_PATH}/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c
 )
