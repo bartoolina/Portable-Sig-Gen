@@ -47,6 +47,7 @@ add_subdirectory(cmake/freertos)
 add_subdirectory(cmake/drivers)
 add_subdirectory(cmake/systemview)
 add_subdirectory(cmake/printf)
+add_subdirectory(cmake/ulog)
 # add_subdirectory(cmake/app)
 
 # Link directories setup
@@ -66,6 +67,7 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
 
 # Add project symbols (macros)
 target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE
+ULOG_ENABLED
     # Add user defined symbols
 )
 
@@ -80,6 +82,7 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
     freertos
     drivers
     printf
+    ulog
 )
 
 

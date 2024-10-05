@@ -26,6 +26,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "SEGGER_SYSVIEW.h"
+#include "SEGGER_RTT.h"
 #include "printf.h"
 /* USER CODE END Includes */
 
@@ -54,7 +55,8 @@
 void SystemClock_Config(void);
 void MX_FREERTOS_Init(void);
 /* USER CODE BEGIN PFP */
-
+void RTT_console_logger(ulog_level_t severity, char *msg);
+void UART_console_logger(ulog_level_t severity, char *msg);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -95,6 +97,9 @@ int main(void)
 	/* USER CODE BEGIN 2 */
 
 	SEGGER_SYSVIEW_Conf();
+	ulog_init();
+	ulog_subscribe(RTT_console_logger, ULOG_DEBUG_LEVEL);
+	ulog_subscribe(UART_console_logger, ULOG_WARNING_LEVEL);
 	/* USER CODE END 2 */
 
 	/* Init scheduler */
@@ -165,10 +170,15 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-void UART_console_logger(char *msg)
+void RTT_console_logger(ulog_level_t severity, char *msg)
+{
+	SEGGER_RTT_printf(0, "[%s]: %s\n", ulog_level_name(severity), msg);
+	// SEGGER_SYSVIEW_PrintfTarget("[%s]: %s\n", ulog_level_name(severity), msg);
+}
+void UART_console_logger(ulog_level_t severity, char *msg)
 {
 	uint8_t _msg[32] = {0};
-	uint8_t _msg_lenght = snprintf((char *)_msg, 32, "%s\n", msg);
+	uint8_t _msg_lenght = snprintf((char *)_msg, 32, "[%s]: %s\n", ulog_level_name(severity), msg);
 	HAL_UART_Transmit(&hlpuart1, _msg, _msg_lenght, 1000);
 }
 /* USER CODE END 4 */
