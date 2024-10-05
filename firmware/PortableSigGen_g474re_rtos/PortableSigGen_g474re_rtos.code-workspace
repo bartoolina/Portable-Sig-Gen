@@ -17,7 +17,9 @@
 		"files.associations": {
 			"gpio.h": "c",
 			"usart.h": "c",
-			"main.h": "c"
+			"main.h": "c",
+			"segger_sysview.h": "c",
+			"segger_sysview_freertos.h": "c"
 		},
 		"cmake.autoSelectActiveFolder": false,
 	},
@@ -62,7 +64,7 @@
 				"servertype": "jlink",
 				"device": "STM32G474RE",
 				"interface": "swd",
-				"svdFile": "C:/MyApps/STM32CubeProgrammer/SVDSTM32G474xx.svd",
+				"svdFile": "C:/MyApps/STM32CubeProgrammer/SVD/STM32G474xx.svd",
 				"preLaunchTask": "${defaultBuildTask}",
 				"rttConfig": {
 					"enabled": true,

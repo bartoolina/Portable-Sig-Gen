@@ -132,7 +132,8 @@ static void exampleTask(void *parameters)
 	/* Infinite loop */
 	for (;;)
 	{
-		vTaskDelay(100);
+		vTaskDelay(200 / portTICK_PERIOD_MS);
+		HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
 	}
 	/* USER CODE END StartDefaultTask */
 }
