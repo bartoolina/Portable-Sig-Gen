@@ -26,6 +26,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "SEGGER_SYSVIEW.h"
+#include "printf.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -164,7 +165,12 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+void UART_console_logger(char *msg)
+{
+	uint8_t _msg[32] = {0};
+	uint8_t _msg_lenght = snprintf((char *)_msg, 32, "%s\n", msg);
+	HAL_UART_Transmit(&hlpuart1, _msg, _msg_lenght, 1000);
+}
 /* USER CODE END 4 */
 
 /**

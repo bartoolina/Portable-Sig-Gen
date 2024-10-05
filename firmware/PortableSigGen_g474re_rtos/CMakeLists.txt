@@ -46,6 +46,7 @@ add_subdirectory(cmake/stm32hal)
 add_subdirectory(cmake/freertos)
 add_subdirectory(cmake/drivers)
 add_subdirectory(cmake/systemview)
+add_subdirectory(cmake/printf)
 # add_subdirectory(cmake/app)
 
 # Link directories setup
@@ -78,6 +79,7 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
     systemview
     freertos
     drivers
+    printf
 )
 
 
